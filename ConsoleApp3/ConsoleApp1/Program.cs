@@ -35,10 +35,10 @@ void ShowAll()
     Console.ReadLine();
 }
 
-void ShowError(string error)
+void RaiseError(string error)
 {
-    Console.WriteLine(error);
-    Console.ReadLine();
+    //Console.WriteLine(error);
+    throw new Exception(error);
 }
 
 void AddMeeting() // meeting start time, duration, room, name
@@ -47,7 +47,7 @@ void AddMeeting() // meeting start time, duration, room, name
     var dateParsingResult = DateTime.TryParse(Console.ReadLine(), out var startTime);
     if (!dateParsingResult)
     {
-        ShowError("Error! Invalid Start date");
+        RaiseError("Error! Invalid Start date");
         return;
     }
 
@@ -55,7 +55,7 @@ void AddMeeting() // meeting start time, duration, room, name
     var durationParsingResult = int.TryParse(Console.ReadLine(), out var duration);
     if (!durationParsingResult)
     {
-        ShowError("Error! Invalid meeting duration");
+        RaiseError("Error! Invalid meeting duration");
         return;
     }
 
@@ -63,13 +63,13 @@ void AddMeeting() // meeting start time, duration, room, name
     var room = Console.ReadLine();
     if (string.IsNullOrEmpty(room))
     {
-        ShowError("Error! Empty room");
+        RaiseError("Error! Empty room");
         return;
     }
 
     if (room.Length > MaximumRoomLenght)
     {
-        ShowError($"Error! Room should not be longer than {MaximumRoomLenght} symbols");
+        RaiseError($"Error! Room should not be longer than {MaximumRoomLenght} symbols");
         return;
     }
     
@@ -77,13 +77,13 @@ void AddMeeting() // meeting start time, duration, room, name
     var name = Console.ReadLine();
     if (string.IsNullOrEmpty(name))
     {
-        ShowError("Error! Empty name");
+        RaiseError("Error! Empty name");
         return;
     }
 
     if (name.Length > MaximumNameLenght)
     {
-        ShowError($"Error! Room should not be longer than {MaximumNameLenght} symbols");
+        RaiseError($"Error! Room should not be longer than {MaximumNameLenght} symbols");
         return;
     }
 
@@ -107,17 +107,65 @@ while (true)
 {
     Menu();
     var keyInfo = Console.ReadKey();
-    switch (keyInfo.Key)
+    try
     {
-        case ConsoleKey.D0:
-            Exit();
-            break;
-        case ConsoleKey.D1:
-            AddMeeting();
-            break;
-        case ConsoleKey.D2:
-            ShowAll();
-        break;
-        default: break;
+        switch (keyInfo.Key)
+        {
+            case ConsoleKey.D0:
+                Exit();
+                break;
+            case ConsoleKey.D1:
+                AddMeeting();
+                break;
+            case ConsoleKey.D2:
+                ShowAll();
+                break;
+            default: break;
+        }
+    }
+    catch (Exception e)
+    {
+        try
+        {
+            // log message
+        }
+        catch 
+        {
+            // 
+        }
+        Console.WriteLine(e.Message);
+        Console.ReadLine();
+    }
+    finally
+    {
+
     }
 }
+
+//try
+//{
+//    var zero = 0;
+//    var i = 10 / zero;
+//}
+//catch (DivideByZeroException e)
+//{
+//    Console.WriteLine($"Divide by zero found at: {e.StackTrace}");
+//    throw new Exception("Divide by zero happened", e); // custom exception
+//}
+//catch (Exception e)
+//{
+//    Console.WriteLine($"Error happened: {e.Message} and Stack trace: {e.StackTrace}");
+//    // add message log
+//    throw new Exception("Error happened", e); // custom exception
+//}
+//finally
+//{
+//    Console.WriteLine("Try block is finished, with or without errors");
+//}
+
+
+//Console.WriteLine("Finished without errors");
+
+Guid guid = Guid.NewGuid();
+
+Console.WriteLine(guid);
