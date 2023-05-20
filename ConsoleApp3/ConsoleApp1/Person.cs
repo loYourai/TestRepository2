@@ -4,7 +4,8 @@ namespace ConsoleApp1
 {
     public class Person
     {
-        public string FirstName { get; set; }
+        public string Field;
+        public string FirstName { get; private set; }
         public string LastName { get; set; }
         public string Address { get; set; }
         public int Age { get; set; }
@@ -30,19 +31,29 @@ namespace ConsoleApp1
             PhoneNumber = person.PhoneNumber;
         }
 
+        public void ChangeFirstName()
+        {
+            FirstName = "Artem";
+        }
+
         public static void SayHello()
         {
-            Console.WriteLine($"Hello");
+            PrintToConsole($"Hello");
         }
 
         public void FullName()
         {
-            Console.WriteLine($"{FirstName} {LastName}");
+            PrintToConsole($"{FirstName} {LastName}");
         }
 
         public string GetInfo()
         {
             return $"{FirstName} {LastName} Age: {Age} Address: {Address} Phone: {PhoneNumber}";
+        }
+
+        private static void PrintToConsole(string input)
+        {
+            Console.WriteLine(input);
         }
     }
 }
