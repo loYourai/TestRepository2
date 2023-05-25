@@ -1,11 +1,13 @@
 ﻿// See https://aka.ms/new-console-template for more information
 //Console.WriteLine("Hello, World!");
 
-void MakeNoise(Animal animal)
+using ConsoleApp1;
+
+void MakeNoise(ISpeakable animalWhichCanSpeak)
 {
-    // ...
-    animal.SaySmth();
+    animalWhichCanSpeak.SaySmth();
 }
+
 
 //var dog = new Dog("Jack", "white", 15);
 ////var cat = new Cat("Sally", "black", 10);
@@ -33,30 +35,48 @@ void MakeNoise(Animal animal)
 
 //Console.WriteLine(cat.ToString());
 
-var toyCat = new ToyCat("Sally", "black", 10, false);
+//var toyCat = new ToyCat("Sally", "black", 10, false);
 var cat = new Cat("Sally", "black", 10, false);
-var animal = new Animal("Sally", "black", 10);
+//var animal = new Animal("Sally", "black", 10);
 
-Cat cat1 = toyCat;
-cat1.ToString();
+//Cat cat1 = toyCat;
+//cat1.ToString();
 
-Animal animal1 = cat;
-Animal animal2 = toyCat;
+//Animal animal1 = cat;
+//Animal animal2 = toyCat;
 
-toyCat.SaySmth();
-cat.SaySmth();
-animal.SaySmth();
+//toyCat.SaySmth();
+//cat.SaySmth();
+//animal.SaySmth();
 
-cat1.SaySmth();
-animal1.SaySmth();
-animal2.SaySmth();
-
-((ToyCat)animal2).SaySmth();
-
-if (animal1 is ToyCat anotherToy)
+void CallAllAction(Animal animal)
 {
-    anotherToy.SaySmth();
-} 
+    if (animal is ISpeakable speakableCat)
+    {
+        speakableCat.SaySmth();
+    }
+
+    if (animal is ICanSwim catWhichSwims)
+    {
+        catWhichSwims.DoSwim();
+    }
+}
+
+CallAllAction(cat);
+
+//cat1.SaySmth();
+
+//animal1.SaySmth();
+//animal2.SaySmth();
+
+//((ToyCat)animal2).SaySmth();
+
+//if (animal1 is ToyCat anotherToy)
+//{
+//    anotherToy.SaySmth();
+//} 
+
+var catFromBuidler = new CatBuilder().WithName("Sally").WithWeigh(10).Build();
 
 
 Console.ReadLine();

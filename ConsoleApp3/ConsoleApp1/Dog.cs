@@ -2,14 +2,14 @@
 
 using System;
 
-public class Dog : Animal 
+public class Dog : Animal, ISpeakable
 {
     public Dog(string name, string color, decimal weight) : base(name, color, weight)
     {
 
     }
 
-    public new void SaySmth()
+    public void SaySmth()
     {
         Console.WriteLine("Bark!");
     }

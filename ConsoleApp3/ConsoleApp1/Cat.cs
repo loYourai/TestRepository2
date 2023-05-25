@@ -1,17 +1,17 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-public class Cat : Animal 
+public class Cat : Animal, ISpeakable, ICanSwim
 {
-    protected bool IsLazy { get; set; }
+    public bool IsLazy { get; set; }
+
+    public Cat()
+    {
+
+    }
 
     public Cat(string name, string color, decimal weight, bool isLazy) : base(name, color, weight)
     {
         IsLazy = isLazy;
-    }
-
-    public new void SaySmth()
-    {
-        Console.WriteLine("Meow!");
     }
 
     public override string ToString()
@@ -34,5 +34,15 @@ public class Cat : Animal
     public override int GetHashCode()
     {
         return HashCode.Combine(Name, Color);
+    }
+
+    void ISpeakable.SaySmth()
+    {
+        Console.WriteLine("Meow");
+    }
+
+    public void DoSwim()
+    {
+        Console.WriteLine("I can swim");
     }
 }

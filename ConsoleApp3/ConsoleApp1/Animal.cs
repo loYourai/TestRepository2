@@ -3,27 +3,23 @@
 using System;
 
 
-public class Animal
+public abstract class Animal
 {
-    protected decimal Weight { get; set; }
-    protected string Name { get; set; }
-    protected string Color { get; set; }
+    public decimal Weight { get; set; }
+    public string Name { get; set; }
+    public string Color { get; set; }
+    public bool CanSwim { get; set; }
+
+    public Animal()
+    {
+
+    }
 
     public Animal(string name, string color, decimal weight)
     {
         Name = name;
         Color = color;
         Weight = weight;
-    }
-
-    public void SaySmth()
-    {
-        Console.WriteLine("I'm an animal!");
-    }
-
-    public override string ToString()
-    {
-        return $"I'm an Animal! My name is {Name}";
     }
 }
 
